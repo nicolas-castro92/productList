@@ -1,0 +1,59 @@
+<div class="card bg-base-100 shadow-sm">
+  <div class="card-body">
+    <h2 class="card-title font-redhat font-bold text-2xl text-orange-700">
+      Your Cart ({{ count() }})
+    </h2>
+    @if (shop().length===0) {
+    <img
+      src="product-list-with-cart-main/assets/images/illustration-empty-cart.svg"
+    />
+    <div class="flex justify-center">
+      <span class="text-amber-950">Your added items will appear here</span>
+    </div>
+    }
+    <!--  -->
+    @else {
+      @for (item of shop() ; track $index) {
+      <p>{{ item.name }}</p>
+      <div class="flex items-center justify-between w-full">
+        <div class="flex items-center gap-2">
+          <p class="font-redhat font-bold text-orange-700 mr-2">
+            {{ item.quantity }}x
+          </p>
+          <p class="font-redhat font-extralight text-gray-600">
+            {{ item.price | currency }}
+          </p>
+          <p class="font-redhat font-normal text-amber-950">
+            {{ item.quantity * item.price | currency }}
+          </p>
+        </div>
+
+        <button
+          (click)="delete(item)"
+          type="button"
+          class="ml-auto group flex items-center justify-center w-4 h-4 rounded-full border border-orange-300 bg-white shadow-sm hover:-translate-y-1 hover:shadow-lg hover:border-orange-950 transition-all duration-300 cursor-pointer"
+        >
+          <img
+            src="/product-list-with-cart-main/assets/images/icon-remove-item.svg"
+            class="w-2 h-2 transition-colors duration-300 group-hover:brightness-0 group-hover:hue-rotate-0 group-hover:saturate-0 group-hover:sepia group-hover:invert-0"
+          />
+        </button>
+      </div>
+
+      <hr class="border-gray-100" />
+      }
+
+    <div class="flex justify-between">
+      <span>Order Total</span>
+      <span class="justify-end">
+        <h1 class="font-redhat font-bold text-2xl text-amber-950">
+          {{ orderTotal() | currency }}
+        </h1></span
+      >
+    </div>
+    <div class="card-actions">
+      <button class="btn btn-primary btn-block">Confirm Order</button>
+    </div>
+    }
+  </div>
+</div>

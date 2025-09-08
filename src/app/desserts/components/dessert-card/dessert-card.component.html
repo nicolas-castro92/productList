@@ -1,0 +1,72 @@
+<div class="bg-base-100 shadow-sm">
+  <figure class="px-10 pt-10">
+    <img
+      [src]="imageUrl()"
+      alt="Shoes"
+      [ngClass]="{
+        'rounded-xl':quantity()>0,
+        'border-2': quantity()>0,
+        'border-orange-600': quantity()>0,
+      }"
+    />
+  </figure>
+  @if (!isInCart()) {
+
+  <div class="flex justify-center -mt-5">
+    <button
+      class="btn btn-primary flex p-0 bg-white border border-orange-700"
+      style="width: 200px; height: px"
+      (click)="onSend(dessert())"
+    >
+      <img
+        src="/product-list-with-cart-main/assets/images/icon-add-to-cart.svg"
+        alt="Carrito"
+        class="w-5 h-5 "
+      />
+      <span class="text-orange-700">
+        Add to Cart
+
+      </span>
+    </button>
+  </div>
+  }@else{
+
+  <div class="flex justify-center -mt-5">
+    <button class="btn btn-primary flex p-0 bg-orange-700" style="width: 200px; height: px">
+      <div
+        class="flex-1 flex justify-center items-center h-full"
+        (click)="onRemove(dessert())"
+      >
+        <img
+          src="/product-list-with-cart-main/assets/images/icon-decrement-quantity.svg"
+          alt="Carrito"
+        />
+      </div>
+      <div class="flex-1 flex justify-center items-center text-white">
+        {{ quantity() }}
+      </div>
+
+      <div
+        class="flex flex-1 justify-center items-center"
+        (click)="onSend(dessert())"
+      >
+        <img
+          src="/product-list-with-cart-main/assets/images/icon-increment-quantity.svg"
+          alt="Carrito"
+        />
+      </div>
+    </button>
+  </div>
+
+  }
+
+  <div class="card-body">
+    <h2 class="font-redhat font-extralight text-amber-900 opacity-70 ">{{ dessert().category }}</h2>
+    <p class="card-title font-redhat font-bold text-amber-950">
+      {{ dessert().name }}
+    </p>
+    <p class="font-redhat font-bold text-orange-700 text-xl">
+      {{ dessert().price | currency }}
+    </p>
+  </div>
+</div>
